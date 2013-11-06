@@ -1,0 +1,29 @@
+{
+  "name": "swada",
+  "author": {
+    "name": "Markus Ast",
+    "email": "npm.m@rkusa.st"
+  },
+  "version": "0.0.0",
+  "homepage": "https://github.com/rkusa/swada",
+  "scripts": {
+    "start": "node app",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "node-eventproxy": "0.2.x",
+    "validator": "1.5.x"
+  },
+  "devDependencies": {
+    "mocha": "1.13.x",
+    "chai": "1.8.x"
+  },
+  "bugs": "https://github.com/rkusa/swada/issues",
+  "repository" : {
+    "type" : "git",
+    "url" : "git://github.com/rkusa/swada.git"
+  },
+  "engines": {
+    "node": ">=0.8"
+  }
+}
