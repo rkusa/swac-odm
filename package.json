@@ -1,27 +1,28 @@
 {
-  "name": "swada",
+  "name": "swac-orm",
   "author": {
     "name": "Markus Ast",
     "email": "npm.m@rkusa.st"
   },
   "version": "0.0.0",
-  "homepage": "https://github.com/rkusa/swada",
+  "homepage": "https://github.com/rkusa/swac-orm",
   "scripts": {
     "start": "node app",
     "test": "mocha"
   },
   "dependencies": {
     "node-eventproxy": "0.2.x",
+    "implode": "1.0.x",
     "validator": "1.5.x"
   },
   "devDependencies": {
     "mocha": "1.13.x",
     "chai": "1.8.x"
   },
-  "bugs": "https://github.com/rkusa/swada/issues",
+  "bugs": "https://github.com/rkusa/swac-orm/issues",
   "repository" : {
     "type" : "git",
-    "url" : "git://github.com/rkusa/swada.git"
+    "url" : "git://github.com/rkusa/swac-orm.git"
   },
   "engines": {
     "node": ">=0.8"
