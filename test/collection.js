@@ -26,7 +26,7 @@ suite('Collection', function() {
       })
     }).not.to.throw()
   })
-  test('instantiate', function() {
+  test('instantiation', function() {
     todos = new Todos([
       new Todo({ task: 'First',  isDone: true }),
       new Todo({ task: 'Second', isDone: false })
@@ -34,13 +34,10 @@ suite('Collection', function() {
     expect(todos).to.be.instanceOf(Array)
     expect(todos).to.have.lengthOf(2)
   })
-  
-  suite('Properties', function() {
-    test('should work', function() {
-      expect(todos).to.have.property('completed', 1)
-      todos[1].isDone = true
-      expect(todos).to.have.property('completed', 2)
-    })
+  test('properties', function() {
+    expect(todos).to.have.property('completed', 1)
+    todos[1].isDone = true
+    expect(todos).to.have.property('completed', 2)
   })
   
   var prepared
@@ -49,13 +46,13 @@ suite('Collection', function() {
       todos.on('stackoverflow', proxy(todos, 'reset'))
       prepared = implode(todos)
     })
-    test('should include the proper #$type', function() {
+    test('#$type property', function() {
       expect(prepared).to.have.property('$type', 'Collection/TodoCollection')
     })
-    test('should not include its functional properties', function() {
+    test('functional properties', function() {
       expect(prepared.obj).to.not.have.property('completed')
     })
-    test('should include events', function() {
+    test('events', function() {
       expect(prepared.obj).to.have.property('_events')
       expect(prepared.obj._events).to.have.property('stackoverflow')
     })
@@ -66,16 +63,16 @@ suite('Collection', function() {
     suiteSetup(function() {
       recovered = implode.recover(prepared)
     })
-    test('should recover its instance', function() {
+    test('instance', function() {
       expect(recovered).to.be.instanceof(Array)
     })
-    test('shouldn\'t have the #$type property', function() {
+    test('#$type property should be removed', function() {
       expect(recovered).to.not.have.property('$type')
     })
-    test('should regain its functional properties', function() {
+    test('functional properties', function() {
       expect(recovered).to.have.property('completed', 2)
     })
-    test('should regain its events', function() {
+    test('events', function() {
       expect(recovered).to.have.property('_events')
       expect(recovered._events).to.have.property('stackoverflow')
     })
