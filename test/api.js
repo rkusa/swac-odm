@@ -2,7 +2,8 @@ var server = require('../lib/server')
   , express = require('express')
   , app = express()
   , httpServer
-  , Todo = require('./fixtures').Todo
+  , fixtures = require('./fixtures')
+  , Todo = fixtures.Todo
 
 suite('API Server', function() {
   suiteSetup(function() {
@@ -49,8 +50,9 @@ suite('API Client', function() {
     httpServer.close(done)
     server.reset()
     Todo.extend(function() {
-      this.use(require('./fixtures').adapter,require('./fixtures/todo.views.server').definition)
+      this.use(fixtures.adapter,require('./fixtures/todo.views.server').definition)
     })
+    fixtures.adapter.clear()
   })
   require('./templates/api')(true)
 })

@@ -3,7 +3,7 @@ var request  = require('supertest')
   , client   = fixtures.client
   , expect   = require('chai').expect
 
-suite('Server', function(){
+suite('Server', function() {
   suiteSetup(function() {
     require('./fixtures/todo.views')
   })

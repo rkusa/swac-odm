@@ -14,20 +14,22 @@ suite('Security', function() {
     d.req = {}
     d.enter()
 
-    async.parallel([
-      function(cb) {
-        a = new Todo({ task: 'A', isDone: false })
-        a.save(function() {
-          cb()
-        })
-      },
-      function(cb) {
-        b = new Todo({ task: 'B', isDone: false })
-        b.save(function() {
-          cb()
-        })
-      }
-    ], done)
+    process.nextTick(function() {
+      async.parallel([
+        function(cb) {
+          a = new Todo({ task: 'A', isDone: false })
+          a.save(function() {
+            cb()
+          })
+        },
+        function(cb) {
+          b = new Todo({ task: 'B', isDone: false })
+          b.save(function() {
+            cb()
+          })
+        }
+      ], done)
+    })
   })
   suiteTeardown(function() {
     Todo._definition.allow.instance = {}

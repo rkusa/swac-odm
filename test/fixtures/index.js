@@ -2,7 +2,7 @@ var Todo = exports.Todo = require('./todo')
   , express = require('express')
 
 var app = express()
-app.use(express.logger('dev'))
+// app.use(express.logger('dev'))
 exports.server = require('../../lib/server')
 app.use('/api', exports.server.middleware())
 exports.client = require('supertest')(app)
@@ -11,6 +11,7 @@ var db = exports.db = {}
 exports.adapter = {
   clear: function() {
     for (var key in db) delete db[key]
+    delete process.domain.swac
   },
   initialize: function(Todo, opts, definition, callback) {
     var views = {}
