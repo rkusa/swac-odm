@@ -1,4 +1,11 @@
 var Todo = exports.Todo = require('./todo')
+  , express = require('express')
+
+var app = express()
+app.use(express.logger('dev'))
+exports.server = require('../../lib/server')
+app.use('/api', exports.server.middleware())
+exports.client = require('supertest')(app)
 
 var db = exports.db = {}
 exports.adapter = {

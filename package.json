@@ -24,7 +24,8 @@
     "mocha": "1.13.x",
     "chai": "1.8.x",
     "supertest": "0.8.x",
-    "jquery": "*"
+    "jquery": "*",
+    "async": "0.2.x"
   },
   "bugs": "https://github.com/rkusa/swac-odm/issues",
   "repository" : {

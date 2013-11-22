@@ -37,18 +37,20 @@ suite('API Client', function() {
 
     // configure sever
     // app.use(express.logger('dev'))
-    app.use(express.static(__dirname + '/fixtures/public'))
     app.use('/api', server.middleware())
+
+    require('../lib').init('/api')
 
     // start server
     httpServer = require('http').createServer(app)
     httpServer.listen(3001, done)
   })
   suiteTeardown(function(done) {
-    delete require.cache[require.resolve('./fixtures/todo')]
-    delete require.cache[require.resolve('./fixtures/todo.views')]
     httpServer.close(done)
     server.reset()
+    Todo.extend(function() {
+      this.use(require('./fixtures').adapter,require('./fixtures/todo.views.server').definition)
+    })
   })
   require('./templates/api')(true)
 })

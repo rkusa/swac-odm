@@ -1,11 +1,7 @@
 var request  = require('supertest')
-  , express  = require('express')
   , fixtures = require('./fixtures')
+  , client   = fixtures.client
   , expect   = require('chai').expect
-
-var app = express()
-
-app.use('/api', require('../lib/server').middleware())
 
 suite('Server', function(){
   suiteSetup(function() {
@@ -19,7 +15,7 @@ suite('Server', function(){
       fixtures.adapter.clear()
     })
     test('all', function(done) {
-      request(app)
+      client
       .get('/api/todos')
       .expect(200)
       .end(function(err, res) {
@@ -34,7 +30,7 @@ suite('Server', function(){
       })
     })
     test('get', function(done) {
-      request(app)
+      client
       .get('/api/todos/1')
       .expect(200)
       .end(function(err, res) {
@@ -45,12 +41,12 @@ suite('Server', function(){
       })
     })
     test('get to undefined', function(done) {
-      request(app)
+      client
       .get('/api/todos/2')
       .expect(404, done)
     })
     test('delete', function(done) {
-      request(app)
+      client
       .del('/api/todos/1')
       .expect(204)
       .end(function(err, res) {
@@ -60,12 +56,12 @@ suite('Server', function(){
       })
     })
     test('delete to undefined', function(done) {
-      request(app)
+      client
       .del('/api/todos/2')
       .expect(404, done)
     })
     test('post', function(done) {
-      request(app)
+      client
       .post('/api/todos')
       .send({ task: 'do this' })
       .expect(200)
@@ -77,7 +73,7 @@ suite('Server', function(){
       })
     })
     test('put', function(done) {
-      request(app)
+      client
       .put('/api/todos/1')
       .send({ task: 'do something else'})
       .expect(200)
@@ -89,7 +85,7 @@ suite('Server', function(){
       })
     })
     test('put to undefined', function(done) {
-      request(app)
+      client
       .put('/api/todos/2')
       .send({ task: 'do something else'})
       .expect(200)
@@ -106,7 +102,7 @@ suite('Server', function(){
       fixtures.db['2'] = new fixtures.Todo({ id: '2', task: '...', list: 'A' })
       fixtures.db['3'] = new fixtures.Todo({ id: '3', task: '...', list: 'A' })
 
-      request(app)
+      client
       .get('/api/lists/A/todos')
       .expect(200)
       .end(function(err, res) {
