@@ -32,16 +32,16 @@ suite('Security', function() {
     })
   })
   suiteTeardown(function() {
-    Todo._definition.allow.instance = {}
-    Todo._definition.deny.instance = {}
+    Todo._definition._allow.instance = {}
+    Todo._definition._deny.instance = {}
     fixtures.adapter.clear()
   })
   suite('all', function() {
     setup(function() {
-      Todo._definition.allow.instance.all = function(req, todo) {
+      Todo._definition._allow.instance.all = function(req, todo) {
         return allow && (!todo || todo.task === 'A')
       }
-      Todo._definition.deny.instance.all  = function() { return false  }
+      Todo._definition._deny.instance.all  = function() { return false  }
     })
     test('GET', function(done) {
       async.series([
