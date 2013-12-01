@@ -17,7 +17,7 @@
   "dependencies": {
     "node-eventproxy": "0.3.x",
     "implode": "1.1.x",
-    "validator": "1.5.x",
+    "validator": "2.0.x",
     "express": "3.4.x"
   },
   "devDependencies": {
