@@ -85,7 +85,6 @@ suite('Cache', function() {
 
         // should not return the cache, it should return a copy instead
         expect(todos).to.not.equal(mock)
-        expect(todos).to.have.members(mock)
 
         done()
       })
@@ -122,7 +121,6 @@ suite('Cache', function() {
 
         // should not return the cache, it should return a copy instead
         expect(todos).to.not.equal(mock)
-        expect(todos).to.have.members(mock)
 
         done()
       })
@@ -169,6 +167,9 @@ suite('Cache', function() {
 
         // cache should be updated
         expect(cache.docs[1]).to.have.property('task', 'updated')
+
+        // should invalidate views
+        expect(cache.views.todos).to.eql({})
 
         done()
       })
