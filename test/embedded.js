@@ -35,6 +35,20 @@ suite('Embedded Models', function() {
         project.todo = null
       }).to.not.throw()
     })
+    it('changed event should be bubbled', function() {
+      var project = new Project
+      var todo = project.todo = new Todo
+      var hasChanged = false
+      project.on('changed', function() {
+        hasChanged = true
+      })
+      todo.task = 'something'
+      expect(hasChanged).to.be.ok
+      project.todo = new Todo
+      hasChanged = false
+      todo.task = 'something else'
+      expect(hasChanged).to.be.not.ok
+    })
   })
   describe('Array of embedded models', function() {
     it('should be by default an observable array with the propper child model', function() {
@@ -57,6 +71,23 @@ suite('Embedded Models', function() {
       expect(project.todos[1]).to.not.be.instanceOf(Todo)
       expect(project.todos[0].task).to.equal('A')
       expect(project.todos[1].task).to.equal('B')
+    })
+    it('changed event should be bubbled', function() {
+      var project = new Project
+      var todo = new Todo
+      project.todos = [todo]
+      var hasChanged = false
+      project.on('changed', function() {
+        hasChanged = true
+      })
+      todo.task = 'something'
+      expect(hasChanged).to.be.ok
+      project.todos = []
+      hasChanged = false
+      todo.task = 'something else'
+      expect(hasChanged).to.be.not.ok
+      project.todos.push(new Todo)
+      expect(hasChanged).to.be.ok
     })
   })
 })
