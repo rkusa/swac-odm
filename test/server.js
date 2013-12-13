@@ -9,7 +9,7 @@ suite('Server', function() {
   })
   suite('Operations', function() {
     setup(function() {
-      fixtures.db['1'] = new fixtures.Todo({ id: '1', task: '...' })
+      fixtures.db['1'] = new fixtures.Todo({ id: '1', task: '...', isDone: false })
     })
     teardown(function() {
       fixtures.adapter.clear()

@@ -11,7 +11,7 @@ module.exports = function(isClient) {
     d.enter()
   })
   setup(function() {
-    fixtures.db['1'] = new fixtures.Todo({ id: '1', task: '...' })
+    fixtures.db['1'] = new fixtures.Todo({ id: '1', task: '...', isDone: false })
   })
   teardown(function() {
     fixtures.adapter.clear()
@@ -34,8 +34,8 @@ module.exports = function(isClient) {
       expect(todos).to.be.an.array
       expect(todos).to.have.lengthOf(1)
       with (todos[0]) {
-        expect(task).to.eql('...')
-        expect(isDone).to.eql(false)
+        expect(task).to.equal('...')
+        expect(isDone).to.equal(false)
       }
       done()
     })
@@ -43,8 +43,8 @@ module.exports = function(isClient) {
   test('get', function(done) {
     Todo.get('1', function(err, todo) {
       expect(err).to.not.exist
-      expect(todo.task).to.eql('...')
-      expect(todo.isDone).to.eql(false)
+      expect(todo.task).to.equal('...')
+      expect(todo.isDone).to.equal(false)
       done()
     })
   })
