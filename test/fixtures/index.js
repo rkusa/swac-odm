@@ -16,11 +16,13 @@ exports.adapter = {
   initialize: function(Todo, opts, definition, callback) {
     var views = {}
     var api = {
-      view: function(/*view, key, callback*/) {
+      view: function(/*view, key, query, callback*/) {
         var args = Array.prototype.slice.call(arguments)
           , callback = args.pop()
+          , query = typeof args[args.length - 1] === 'object' ? args.pop() : {}
           , view = args.shift()
           , key = args.shift()
+          
         var arr = []
         Object.keys(db).forEach(function(key) {
           arr.push(db[key])
@@ -29,6 +31,9 @@ exports.adapter = {
           arr = arr.filter(function(row) {
             return views[view](row, key)
           })
+        }
+        if (query.limit) {
+          arr = arr.splice(0, query.limit)
         }
         if (callback) callback(null, arr)
       },

@@ -90,6 +90,48 @@ suite('Cache', function() {
       })
     })
   })
+  test('query', function(done) {
+    Todo.all({ limit: 1 }, function(err, todos) {
+      expect(err).to.not.exist
+      expect(todos).to.have.lengthOf(1)
+
+      // should be cached
+      expect(process.domain.swac).to.exist
+      var cache = process.domain.swac.cache
+        , docs  = cache.docs
+      expect(cache = cache.views.todos).to.exist
+      expect(cache = cache['all?limit=1']).to.exist
+
+      expect(cache).to.have.lengthOf(1)
+      // should not be the same array
+      expect(cache).to.not.equal(todos)
+      // but the same content
+
+      for (var i = 0; i < cache.length; ++i) {
+        expect(cache[i]).to.eql(todos[i])
+        expect(cache[i]).to.not.equal(todos[i])
+        // should but docs into cache, too
+        expect(docs[todos[i].id]).to.eql(todos[i])
+        expect(docs[todos[i].id]).to.not.equal(todos[i])
+      }
+
+      // should be retrieved from cache
+      var mock = [new Todo, new Todo]
+      cache.splice.apply(cache, [0, 2].concat(mock))
+
+      Todo.all({ limit: 1 }, function(err, todos) {
+        expect(err).to.not.exist
+
+        expect(todos).to.have.lengthOf(2)
+        expect(todos).to.not.have.members([fixtures.db[1], fixtures.db[2]])
+
+        // should not return the cache, it should return a copy instead
+        expect(todos).to.not.equal(mock)
+
+        done()
+      })
+    })
+  })
   test('view', function(done) {
     Todo.byList('A', function(err, todos) {
       expect(err).to.not.exist

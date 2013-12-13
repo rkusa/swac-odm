@@ -106,4 +106,14 @@ module.exports = function(isClient) {
       done()
     })
   })
+  test('view query', function(done) {
+    fixtures.db['2'] = new fixtures.Todo({ id: '2', task: '...', list: 'A' })
+    fixtures.db['3'] = new fixtures.Todo({ id: '3', task: '...', list: 'A' })
+    
+    Todo.byList('A', { limit: 1 }, function(err, todos) {
+      expect(err).to.not.exist
+      expect(todos).to.have.lengthOf(1)
+      done()
+    })
+  })
 }
