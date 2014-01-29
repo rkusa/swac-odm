@@ -60,7 +60,7 @@ suite('Array', function() {
       todos.remove(todo)
       
       Object.keys(todo._events).forEach(function(i) {
-        expect(todo._events[i]).to.have.lengthOf(0)
+        expect(todo._events[i] || []).to.have.lengthOf(0)
       })
     })
   })
