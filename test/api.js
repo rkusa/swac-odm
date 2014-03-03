@@ -14,7 +14,7 @@ suite('API Server', function() {
 
 suite('API Client', function() {
   suiteSetup(function(done) {
-    GLOBAL.$ = require('jquery')
+    GLOBAL.XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest
     GLOBAL.window = {
       location: { origin: 'http://127.0.0.1:3001' }
     }
