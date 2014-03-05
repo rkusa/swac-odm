@@ -12,6 +12,18 @@
   },
   "browser": {
     "./server": false,
+    "./server/helper/authorize": false,
+    "./server/helper/execute-hook": false,
+    "./server/middleware/after-hooks": false,
+    "./server/middleware/authorize-properties": false,
+    "./server/middleware/authorize-read": false,
+    "./server/middleware/authorize-write": false,
+    "./server/middleware/before-hooks": false,
+    "./server/middleware/execute-write": false,
+    "./server/middleware/fetch-documents": false,
+    "./server/middleware/validation": false,
+    "./server/adapter-wrapper": false,
+    "./server/cache": false,
     "express": false
   },
   "dependencies": {
