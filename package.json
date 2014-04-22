@@ -30,7 +30,9 @@
     "node-eventproxy": "0.3.x",
     "implode": "1.1.x",
     "validator": "3.3.x",
-    "express": "3.4.x"
+    "express": "^4.0.0",
+    "body-parser": "^1.0.2",
+    "method-override": "^1.0.0"
   },
   "devDependencies": {
     "mocha": "1.17.x",
